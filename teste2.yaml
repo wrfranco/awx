@@ -2,9 +2,7 @@
   gather_facts: true
   become: true
   tasks:
-  - yum:
-    name: bind-utils
-    when: ansible_os_family == 'RedHat'
-  - apt:
-    name: dnsutils
-    when: ansible_os_family == 'Debian'
+  - name: Touch a file (creates if not present, updates modification time if present)
+    ansible.windows.win_file:
+      path: C:\Temp\foo.conf
+      state: touch

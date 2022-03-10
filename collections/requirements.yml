@@ -2,4 +2,5 @@
 collections:
   # With just the collection name
   - chocolatey.chocolatey
+  - ansible.windows
 
