@@ -1,4 +1,9 @@
 - hosts: all
+  ansible_user: wagnero@corp.psoft
+  ansible_password: $Pantera01
+  ansible_connection: winrm
+  ansible_port: 5985
+  ansible_winrm_transport: kerberos
   gather_facts: true
   #become: true
   tasks:
