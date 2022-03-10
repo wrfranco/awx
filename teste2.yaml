@@ -6,4 +6,5 @@
     ansible.windows.win_file:
       path: C:\Temp\foo.conf
       state: touch
+      become: true
 
