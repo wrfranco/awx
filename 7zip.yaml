@@ -1,4 +1,4 @@
-- hosts: windows
+- hosts: all
   tasks:
   # Install/uninstall with chocolatey
     - name: Ensure 7-Zip is installed via Chocolatey
