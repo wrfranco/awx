@@ -5,9 +5,9 @@
   tasks:
     - name: Run a cmd.exe command
       community.windows.psexec:
-        hostname: {{ host_name }}
-        connection_username: {{ user_name }}
-        connection_password: {{ user_pass }}
+        hostname: "{{ host_name }}"
+        connection_username: "{{ user_name }}"
+        connection_password: "{{ user_pass }}"
         executable: cmd.exe
         arguments: /c echo Hello World
       register: output
