@@ -5,8 +5,8 @@
     - name: Run a cmd.exe command
       community.windows.psexec:
         hostname:192.168.0.99
-        connection_username: wagnero
-        connection_password: $Pantera01
+        connection_username: "wagnero"
+        connection_password: "$Pantera01"
         executable: cmd.exe
         arguments: /c echo Hello World
       register: output
