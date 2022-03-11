@@ -1,0 +1,17 @@
+- hosts: localhost
+  gather_facts: true
+  #become: true
+  connection: local
+  tasks:
+    - name: Run a cmd.exe command
+      community.windows.psexec:
+        hostname: "{{ inventory_hostname }}"
+        connection_username: "{{ user_name }}"
+        connection_password: "{{ user_pass }}"
+        executable: cmd.exe
+        arguments: /c hostname
+      register: output
+    - debug:
+         var: output.stdout_lines
+
+
