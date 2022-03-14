@@ -1,0 +1,26 @@
+- hosts: all
+  gather_facts: true
+  #become: true
+  connection: local
+  tasks:
+    - name: Restart a service
+      win_service:
+        name: "zabbix agent"
+        state: stopped
+    - name:  Troca o valor do server no arquivo do zabbix
+      lineinfile:
+      path: /etc/selinux/config
+      regexp: '^\$kernel = new AppKernel('prod', false);'
+      line: '$kernel = new AppKernel('dev', true);'
+    - name: Run a cmd.exe command
+      community.windows.psexec:
+        hostname: "{{ inventory_hostname }}"
+        connection_username: "{{ user_name }}"
+        connection_password: "{{ user_pass }}"
+        executable: cmd.exe
+        arguments: /c hostname
+      register: output
+    - debug:
+         var: output.stdout_lines
+
+
