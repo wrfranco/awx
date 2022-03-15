@@ -9,7 +9,7 @@
         state: stopped
     - name:  Troca o valor do server no arquivo do zabbix
       community.windows.win_lineinfile:
-      path: "c:\temp\zabbix_agentd.conf"
+      path: c:\temp\zabbix_agentd.conf
       regexp: '^Server='
       line: 'Server= "Alterou a linha"'
       register: output
