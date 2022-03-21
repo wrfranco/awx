@@ -1,19 +1,55 @@
-- hosts: all
-  gather_facts: true
-  #become: true
-  connection: local
+- name: teste
+  hosts: windows
+  #gather_facts: true
+  #connection: local
   tasks:
-    - name: Restart a service
-      win_service:
-        name: "zabbix agent"
-        state: stopped
-    - name:  Troca o valor do server no arquivo do zabbix
-      community.windows.win_lineinfile:
-      path: c:\temp\zabbix_agentd.conf
-      regexp: '^Server='
-      line: 'Server= "Alterou a linha"'
-      register: output
-    - debug:
-         var: output.stdout_lines
+        - name: Stop service
+          win_service:
+            name: Zabbix Agent
+            state: stopped
+          register: output
+        - debug:
+                 msg : "{{output}}"
+
+        - name: Change Server
+          win_lineinfile:
+            path: 'C:\Program Files\Zabbix Agent\zabbix_agentd.conf'
+            regex: '^Server='
+            line: 'Server={{ Server_string }}'
+          register: output2
+          when: Server_string is defined
+        - debug:
+                msg : "{{output2}}"
+
+        - name: Change ServerActive
+          win_lineinfile:
+            path: 'C:\Program Files\Zabbix Agent\zabbix_agentd.conf'
+            regex: '^ServerActive='
+            line: 'ServerActive={{ ServerActive_string }}'
+          register: output5
+          when: ServerActive_string is defined
+        - debug:
+                msg : "{{output5}}  {{ ServerActive_string }}"
+
+
+        - name: Change hostname
+          win_lineinfile:
+            path: 'C:\Program Files\Zabbix Agent\zabbix_agentd.conf'
+            regex: '^Hostname='
+            line: 'Hostname={{ ansible_hostname|lower }}'
+          register: output3
+          when: Server_hostname is defined
+
+        - debug:
+                msg : "{{output3}}"
+        - name: Start service
+          win_service:
+            name: Zabbix Agent
+            state: started
+          register: output4
+        - debug:
+                 msg : "{{output4}}"
+
+
 
 
