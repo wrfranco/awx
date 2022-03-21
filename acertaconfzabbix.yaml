@@ -1,5 +1,5 @@
 - name: teste
-  hosts: teste-loja
+  hosts: all
   #gather_facts: true
   #connection: local
   tasks:
