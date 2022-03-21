@@ -8,7 +8,7 @@
          #hostname: "192.168.100.11"
          hostname: "{{ inventory_hostname }}"
          connection_username: "{{ ansible_user }}"
-         connection_password: "{{ a12nsible_password }}"
+         connection_password: "{{ ansible_password }}"
          executable: powershell
          arguments: -Command {set-executionpolicy -executionpolicy remotesigned;winrm set winrm/config/service '@{AllowUnencrypted="true"}'}
       register: output
