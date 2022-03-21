@@ -7,8 +7,8 @@
       community.windows.psexec:
          #hostname: "192.168.100.11"
          hostname: "{{ inventory_hostname }}"
-         connection_username: "{{ user_name }}"
-         connection_password: "{{ user_pass }}"
+         connection_username: "{{ ansible_user }}"
+         connection_password: "{{ ansible_password }}"
          executable: powershell
          arguments: -Command {set-executionpolicy -executionpolicy remotesigned;winrm set winrm/config/service '@{AllowUnencrypted="true"}'}
       register: output
@@ -18,8 +18,8 @@
       community.windows.psexec:
          #hostname: "192.168.100.11"
          hostname: "{{ inventory_hostname }}"
-         connection_username: "{{ user_name }}"
-         connection_password: "{{ user_pass }}"
+         connection_username: "{{ ansible_user }}"
+         connection_password: "{{ ansible_password }}"
          executable: powershell
          arguments: -Command {winrm quickconfig -q;winrm set winrm/config/service '@{AllowUnencrypted="true"}';winrm set winrm/config/service/auth '@{Basic="true"}'}
       register: output2
