@@ -1,0 +1,8 @@
+---
+- name: Ping host passado via variável
+  # O valor de `target_host` deve corresponder a um host definido no Inventory do AWX
+  hosts: "{{ target_host }}"
+  gather_facts: false
+  tasks:
+    - name: Ping host
+      ansible.builtin.ping:
